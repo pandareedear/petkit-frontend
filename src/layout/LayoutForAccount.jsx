@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Banner from "./Banner";
 import Navbar from "./Navbar";
+import AccountBar from "./AccountBar";
 
 export default function Layout() {
   return (
@@ -13,7 +14,9 @@ export default function Layout() {
           <Navbar />
         </div>
       </div>
-      <div className=" mx-auto w-[100%] h-[60px] pl-[17%] pr-[17%] "></div>
+      <div className="bg-neutral-100 mx-auto w-[100%] h-[60px] pl-[17%] pr-[17%] ">
+        <AccountBar />
+      </div>
       <div className="mx-auto w-[100%] pl-[17%] pr-[17%]">
         <Outlet />
       </div>

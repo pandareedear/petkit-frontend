@@ -1,4 +1,4 @@
-import { WrongIcon } from "../../icons";
+import { WrongIcon } from "../../../icons";
 
 export default function LoginAlert({ message, error }) {
   console.log(Object.keys(error).length);

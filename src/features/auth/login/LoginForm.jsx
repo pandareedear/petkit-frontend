@@ -2,9 +2,9 @@ import LoginInput from "./LoginInput";
 import LoginButton from "./LoginButton";
 import LoginAlert from "./LoginAlert";
 import { useState } from "react";
-import { useAuth } from "../../hooks/use-auth";
+import { useAuth } from "../../../hooks/use-auth";
 import Joi from "joi";
-import InputErrorMessage from "./InputErrorMessage";
+import InputErrorMessage from "../InputErrorMessage";
 
 const loginSchema = Joi.object({
   email: Joi.string().required(),

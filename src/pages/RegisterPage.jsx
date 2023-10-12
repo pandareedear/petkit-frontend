@@ -1,5 +1,5 @@
-import RegisterForm from "../features/auth/RegisterForm";
-import LoginLink from "../features/auth/LoginLink";
+import RegisterForm from "../features/auth/register/RegisterForm";
+import LoginLink from "../features/auth/login/LoginLink";
 
 export default function RegisterPage() {
   return (

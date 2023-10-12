@@ -165,3 +165,45 @@ export function WrongIcon() {
     </svg>
   );
 }
+
+export function ArrowLeft() {
+  return (
+    <div>
+      <svg
+        role="presentation"
+        focusable="false"
+        width="7"
+        height="10"
+        viewBox="0 0 7 10"
+      >
+        <path
+          d="M6 1 2 5l4 4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        ></path>
+      </svg>
+    </div>
+  );
+}
+
+export function ArrowRight() {
+  return (
+    <div>
+      <svg
+        role="presentation"
+        focusable="false"
+        width="7"
+        height="10"
+        viewBox="0 0 7 10"
+      >
+        <path
+          d="m1 9 4-4-4-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        ></path>
+      </svg>
+    </div>
+  );
+}

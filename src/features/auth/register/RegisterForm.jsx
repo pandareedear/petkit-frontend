@@ -1,9 +1,9 @@
 import { useState } from "react";
-import InputErrorMessage from "./InputErrorMessage";
+import InputErrorMessage from "../InputErrorMessage";
 import RegisterButton from "./RegisterButton";
 import RegisterInput from "./RegisterInput";
 import Joi from "joi";
-import { useAuth } from "../../hooks/use-auth";
+import { useAuth } from "../../../hooks/use-auth";
 
 const registerSchema = Joi.object({
   firstName: Joi.string().trim().required(),

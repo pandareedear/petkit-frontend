@@ -5,7 +5,7 @@ export default function RedirectIfAuthenticated({ children }) {
   const { authUser } = useAuth();
   console.log(authUser);
   if (authUser) {
-    return <Navigate to="/auth/order" />;
+    return <Navigate to="/account/order" />;
   }
   return children;
 }

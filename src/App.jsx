@@ -1,5 +1,13 @@
+import Loading from "./components/Loading";
+import { useAuth } from "./hooks/use-auth";
+import Route from "./router/Route";
+
 function App() {
-  return <div className="text-orange-500 text-5xl">App Component</div>;
+  const { initialLoading } = useAuth();
+  if (initialLoading) {
+    return <Loading />;
+  }
+  return <Route />;
 }
 
 export default App;

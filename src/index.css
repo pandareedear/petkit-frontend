@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.boy-filter {
+  filter: invert(82%) sepia(30%) saturate(3207%) hue-rotate(340deg)
+    brightness(100%) contrast(93%);
+}

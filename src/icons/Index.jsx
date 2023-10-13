@@ -1,5 +1,6 @@
 // import { Frame } from "../assets/Frame.png";
 // import { cart } from "../assets/cartpng.png";
+import logo from "../assets/cat-silhouette-svgrepo-com.svg";
 
 export function PetNekoIcon() {
   return (
@@ -74,7 +75,12 @@ export function CartIcon() {
 
 export function LoadingIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 24 24"
+      className="w-7"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
@@ -206,4 +212,8 @@ export function ArrowRight() {
       </svg>
     </div>
   );
+}
+
+export function CatHead() {
+  return <img src={logo} className="boy-filter w-5"></img>;
 }

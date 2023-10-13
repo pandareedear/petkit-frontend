@@ -6,14 +6,14 @@ export default function Navbar() {
   const { authUser } = useAuth();
   return (
     <>
-      <div className="w-[100%] h-[100%] flex flex-row justify-between items-center font-bold ">
+      <div className="w-[100%] h-[100%] flex flex-row justify-between items-center font-bold pl-[16%] pr-[17%]">
         <div className="w-[25%] flex justify-start">
           <Link to="/">
             <PetNekoIcon />
           </Link>
         </div>
         <div className="w-[25%]">
-          <ul className="flex flex-row gap-16 justify-center">
+          <ul className="flex flex-row gap-10 justify-center">
             <Link to="/">
               <li>ALL</li>
             </Link>

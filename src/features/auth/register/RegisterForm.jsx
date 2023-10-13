@@ -62,7 +62,6 @@ export default function RegisterForm() {
     <form onSubmit={handleSubmitForm}>
       <div className="flex flex-col items-center gap-4 m-auto ">
         <h6 className="font-bold text-[45px] pb-6">Sign up</h6>
-
         <RegisterInput
           placeholder="First Name"
           value={input.firstName}

@@ -1,9 +1,17 @@
-import { ArrowRight, ProfileIcon } from "../icons";
+import {
+  ArrowRight,
+  FacebookIcon,
+  InstagramIcon,
+  ProfileIcon,
+  TiktokIcon,
+  TwitterIcon,
+  YoutubeIcon,
+} from "../icons";
 
 export default function Footer() {
   return (
     <div className="">
-      <div className="grid grid-cols-2 mt-34 pl-[17%] pr-[17%]">
+      <div className="grid grid-cols-2 mt-72 pl-[17%] pr-[17%]">
         <div className="flex p-20">
           <div className="flex flex-col justify-start p-6">
             <h1 className="text-4xl font-bold">Subscribe to our </h1>
@@ -24,11 +32,11 @@ export default function Footer() {
         </div>
         <div className="flex flex-col justify-center items-center  gap-10 ">
           <div className="flex flex-row gap-16">
-            <ProfileIcon />
-            <ProfileIcon />
-            <ProfileIcon />
-            <ProfileIcon />
-            <ProfileIcon />
+            <FacebookIcon />
+            <TwitterIcon />
+            <InstagramIcon />
+            <YoutubeIcon />
+            <TiktokIcon />
           </div>
           <div className="text-xs font-bold">
             @2023, PETNEKO.ALL Rights Reserved.

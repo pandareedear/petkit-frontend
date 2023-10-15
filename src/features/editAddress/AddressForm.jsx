@@ -1,12 +1,12 @@
 import AddressInput from "./AddressInput";
 import AddressButton from "./AddressButton";
 
-export default function AddressForm({ formName }) {
+export default function AddressForm({ formName, formDescription }) {
   return (
     <form className="grid grid-cols-2 gap-3 m-auto w-[600px] p-8">
       <div className="grid col-span-full">
         <h1 className="text-xl mb-6 font-bold">{formName}</h1>
-        <p className="text-xs mb-5">Please fill the information below</p>
+        <p className="text-xs mb-5">{formDescription}</p>
       </div>
       <div>
         <AddressInput placeholder={"First name"} />

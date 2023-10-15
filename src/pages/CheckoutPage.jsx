@@ -1,3 +1,9 @@
+import CheckoutBody from "../features/checkout/CheckoutBody";
+
 export default function CheckoutPage() {
-  return <h1>CheckoutPage</h1>;
+  return (
+    <>
+      <CheckoutBody />
+    </>
+  );
 }

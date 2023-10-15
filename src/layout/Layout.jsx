@@ -14,7 +14,7 @@ export default function Layout() {
           <Navbar />
         </div>
       </div>
-      <div className=" mx-auto w-[100%] h-[60px] pl-[17%] pr-[17%] "></div>
+      {/* <div className=" mx-auto w-[100%] h-[60px] pl-[17%] pr-[17%] "></div> */}
       <div className="mx-auto w-[100%] pl-[17%] pr-[17%]">
         <Outlet />
       </div>

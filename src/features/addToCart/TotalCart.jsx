@@ -1,5 +1,5 @@
-import { CatHead } from "../../icons";
 import ButtonBlack from "../ButtonBlack";
+import { Link } from "react-router-dom";
 
 export default function TotalCart() {
   return (
@@ -16,7 +16,9 @@ export default function TotalCart() {
         Taxes and shipping calculated at checkout
       </span>
       <div className="mt-6">
-        <ButtonBlack buttonName={"Checkout"}></ButtonBlack>
+        <Link to="/checkout">
+          <ButtonBlack buttonName={"Checkout"}></ButtonBlack>
+        </Link>
       </div>
     </div>
   );

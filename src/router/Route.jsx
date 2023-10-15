@@ -13,6 +13,7 @@ import QrPage from "../pages/QrPage";
 import { RouterProvider } from "react-router-dom";
 import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticate";
 import Authenticated from "../features/auth/Authenticated";
+import LayoutForCheckout from "../layout/LayoutForCheckout";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,20 @@ const router = createBrowserRouter([
       {
         path: "address",
         element: <AddressPage />,
+      },
+    ],
+  },
+  {
+    path: "/checkout",
+    element: (
+      <Authenticated>
+        <LayoutForCheckout />,
+      </Authenticated>
+    ),
+    children: [
+      {
+        path: "",
+        element: <CheckoutPage />,
       },
     ],
   },

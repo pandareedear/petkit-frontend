@@ -14,6 +14,9 @@ import { RouterProvider } from "react-router-dom";
 import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticate";
 import Authenticated from "../features/auth/Authenticated";
 import LayoutForCheckout from "../layout/LayoutForCheckout";
+import AdminOrderPage from "../pages/AdminOrderPage";
+import AdminProductPage from "../pages/AdminProductPage";
+import LayoutForAdmin from "../layout/LayoutForAdmin";
 
 const router = createBrowserRouter([
   {
@@ -101,6 +104,20 @@ const router = createBrowserRouter([
       {
         path: "qr",
         element: <QrPage />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <LayoutForAdmin />,
+    children: [
+      {
+        path: "order",
+        element: <AdminOrderPage />,
+      },
+      {
+        path: "product",
+        element: <AdminProductPage />,
       },
     ],
   },

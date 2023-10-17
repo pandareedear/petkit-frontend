@@ -56,9 +56,41 @@ export default function AuthContextProvider({ children }) {
     removeAccessToken(), setAuthUser(null);
   };
 
+  const editAddress = async (addressInputObject) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      console.log(addressInputObject);
+      const res = await axios.patch("/auth/address", addressInputObject);
+      addAccessToken(res.data.accessToken);
+      // setAuthUser(res.data.user);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const createProduct = async (CreateProductInputObject) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      console.log(CreateProductInputObject);
+      const res = await axios.post("/admin/product", CreateProductInputObject);
+      addAccessToken(res.data.accessToken);
+    } catch (err) {
+      throw err;
+      // console.log(err);
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ login, register, authUser, initialLoading, logout }}
+      value={{
+        login,
+        register,
+        authUser,
+        initialLoading,
+        logout,
+        editAddress,
+        createProduct,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -2,7 +2,7 @@ import AddressForm from "../editAddress/AddressForm";
 export default function CheckoutForm() {
   return (
     <>
-      <div className="border-r-2 pr-[20px] ">
+      <div className="border-r-2  ">
         <AddressForm formName="Delivery" />
       </div>
     </>

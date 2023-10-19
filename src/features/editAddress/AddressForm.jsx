@@ -4,6 +4,7 @@ import AddressInput from "./AddressInput";
 import AddressButton from "./AddressButton";
 import { useAuth } from "../../hooks/use-auth";
 import InputErrorMessage from "../auth/InputErrorMessage";
+import { Link } from "react-router-dom";
 
 const addressSchema = Joi.object({
   firstName: Joi.string().required().trim(),
@@ -34,7 +35,7 @@ const validateAdress = (input) => {
   }
 };
 
-export default function AddressForm({ formName, formDescription }) {
+export default function AddressForm({ formName, formDescription, buttonName }) {
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -183,7 +184,7 @@ export default function AddressForm({ formName, formDescription }) {
             {error.province && <InputErrorMessage message={error.province} />}
           </div>
           <div className="mt-2">
-            <AddressButton buttonName={"Save address"} />
+            <AddressButton buttonName={buttonName} />
           </div>
         </div>
       </form>

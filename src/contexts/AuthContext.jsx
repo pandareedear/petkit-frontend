@@ -7,6 +7,7 @@ import {
   removeAccessToken,
 } from "../utils/local-storage";
 import { useEffect } from "react";
+import CheckoutInput from "../features/checkout/CheckoutInput";
 
 export const AuthContext = createContext();
 
@@ -68,6 +69,19 @@ export default function AuthContextProvider({ children }) {
     }
   };
 
+  const checkoutAddress = async (checkoutInputObject) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      console.log(checkoutInputObject);
+      const res = await axios.patch(
+        `/auth/address?checkOut=${true}`,
+        checkoutInputObject
+      );
+    } catch (err) {
+      throw err;
+    }
+  };
+
   const createProduct = async (CreateProductInputObject) => {
     // eslint-disable-next-line no-useless-catch
     try {
@@ -90,6 +104,7 @@ export default function AuthContextProvider({ children }) {
         logout,
         editAddress,
         createProduct,
+        checkoutAddress,
       }}
     >
       {children}

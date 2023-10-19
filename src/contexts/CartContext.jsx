@@ -13,7 +13,6 @@ export const CartContext = createContext();
 export default function CartContextProvider({ children }) {
   const [initialLoading, setInitialLoading] = useState(true);
   const [cart, setCart] = useState([]);
-  console.log(cart);
   const [grandTotal, setGrandTotal] = useState([]);
 
   const getCart = () => {
@@ -21,14 +20,11 @@ export default function CartContextProvider({ children }) {
       .get("/auth/cart")
       .then((res) => {
         setCart(res.data.cart);
-        console.log(res.data.cart);
       })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        console.log(grandTotal);
-
         setInitialLoading(false);
       });
   };

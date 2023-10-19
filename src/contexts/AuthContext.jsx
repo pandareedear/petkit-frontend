@@ -13,7 +13,6 @@ export const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
   const [authUser, setAuthUser] = useState(null || getAccessToken());
   const [initialLoading, setInitialLoading] = useState(true);
-  const [cart, setCart] = useState(0);
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -91,7 +90,6 @@ export default function AuthContextProvider({ children }) {
         logout,
         editAddress,
         createProduct,
-        cart,
       }}
     >
       {children}

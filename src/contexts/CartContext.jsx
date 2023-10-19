@@ -35,7 +35,7 @@ export default function CartContextProvider({ children }) {
     } else {
       setInitialLoading(false);
     }
-  }, [cart.length]);
+  }, [cart?.length]);
 
   const getSum = () => {
     return cart?.reduce((acc, item) => {

@@ -7,17 +7,18 @@ export default function CheckoutSummary() {
   return (
     <div className="pl-[48px] pt-12 gap-5 w-[70%] bg-neutral-100 ">
       <div className="mb-7">
-        {cart.map((el) => {
-          return (
-            <div key={el.id}>
-              <CheckoutLists
-                imageUrl={el?.Product?.product[0]?.imageUrl}
-                productName={el?.Product.productName}
-                productPrice={el?.totalPrice}
-              />
-            </div>
-          );
-        })}
+        {cart &&
+          cart.map((el) => {
+            return (
+              <div key={el.id}>
+                <CheckoutLists
+                  imageUrl={el?.Product?.product[0]?.imageUrl}
+                  productName={el?.Product.productName}
+                  productPrice={el?.totalPrice}
+                />
+              </div>
+            );
+          })}
       </div>
 
       <div className="flex flex-row justify-between mb-2 mr-[450px]">

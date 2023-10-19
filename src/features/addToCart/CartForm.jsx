@@ -3,7 +3,7 @@ import TotalCart from "../addToCart/TotalCart";
 import { useCart } from "../../hooks/use-cart";
 
 export default function CartForm() {
-  const { cart, grandTotal, handleRemoveClick } = useCart();
+  const { cart, setCart, grandTotal, handleRemoveClick } = useCart();
 
   return (
     <>

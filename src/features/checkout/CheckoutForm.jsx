@@ -5,6 +5,7 @@ import Joi from "joi";
 import CheckoutButton from "../checkout/CheckoutButton";
 import CheckoutErrorMessage from "../checkout/CheckoutErrorMessage";
 import CheckoutInput from "./CheckoutInput";
+import { useCart } from "../../hooks/use-cart";
 
 const addressSchema = Joi.object({
   firstName: Joi.string().required().trim(),
@@ -35,11 +36,7 @@ const validateAdress = (input) => {
   }
 };
 
-export default function CheckoutForm({
-  formName,
-  formDescription,
-  buttonName,
-}) {
+export default function CheckoutForm({ formName, formDescription }) {
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -53,7 +50,7 @@ export default function CheckoutForm({
   const [error, setError] = useState({});
 
   const { checkoutAddress } = useAuth();
-
+  const { setCart } = useCart();
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -66,10 +63,14 @@ export default function CheckoutForm({
       return setError(validateError);
     }
     setError({});
-    checkoutAddress(input).catch((err) => {
-      console.log(err.response.data);
-      setError({ mobile: err.response.data.message });
-    });
+    checkoutAddress(input)
+      .then((res) => {
+        setCart();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        setError({ mobile: err.response.data.message });
+      });
   };
 
   return (

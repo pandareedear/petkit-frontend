@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-
-import { useAuth } from "../hooks/use-auth";
-import { PetNekoIcon, OrderIcon, CartIcon, ProductIcon } from "../icons";
+import { PetNekoIcon, OrderIcon, ProductIcon } from "../icons";
 
 export default function Navbar() {
   return (

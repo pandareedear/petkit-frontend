@@ -1,25 +1,79 @@
 import { useParams } from "react-router-dom";
-
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../config/axios";
 import ButtonOrange from "../features/ButtonOrange";
 import ButtonBlack from "../features/ButtonBlack";
 import { CatHead } from "../icons";
+import { addAccessToken, getAccessToken } from "../utils/local-storage";
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth";
 
 export default function ProductPage() {
   const { productId } = useParams();
-  // return <h1>ProductPage {productId}</h1>;
+  const [product, setProduct] = useState({});
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    if (getAccessToken()) {
+      axios
+        .get(`/product/${productId}`)
+        .then((res) => {
+          setProduct(res.data);
+          console.log(res.data);
+        })
+        .finally(() => {
+          setInitialLoading(false);
+        });
+    } else {
+      setInitialLoading(false);
+    }
+  }, []);
+
+  const updateQuantity = () => {
+    if (quantity > 0) setQuantity(quantity - 1);
+  };
+
+  const { cart, setCart } = useAuth();
+
+  const handleClick = async () => {
+    try {
+      const shoppingCart = {
+        quantity,
+        productId: product.id,
+        price: product?.price,
+      };
+      console.log(shoppingCart);
+      const res = await axios.post("/auth/cart", shoppingCart);
+      console.log(cart);
+      console.log("haha");
+      setCart([shoppingCart]);
+      setCart;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
       <div className="grid grid-cols-2">
-        <div className="bg-gray-200" name={"productImage"}>
-          {productId}
+        <div name={"productImage"}>
+          <img
+            src={
+              Array.isArray(product?.product)
+                ? product?.product[0].imageUrl
+                : ""
+            }
+            alt=""
+          />
         </div>
         <div
           className=" gap-8 flex flex-col pl-14"
           name={"productDesccription"}
         >
           <div className=" flex  flex-col gap-8 ">
-            <div className="text-4xl font-bold ">PETKIT PURAMAX</div>
+            <div className="text-4xl font-bold ">{product?.productName}</div>
             <div className="flex flex-row gap-2 ">
               <CatHead />
               <CatHead />
@@ -27,12 +81,8 @@ export default function ProductPage() {
               <CatHead />
               <CatHead />
             </div>
-            <p className="text-sm ">
-              Automatic self-cleaning litter box comes with a multi-cat-friendly
-              space. Triple deodorization and five cleaning modes take pet care
-              to the next level
-            </p>
-            <h5>21,035.00 ฿</h5>
+            <p className="text-sm ">{product?.description}</p>
+            <h5>{Number(product?.price).toLocaleString("en-US")}</h5>
             <hr className="border[1px] border-neutral-300" />
           </div>
           <div className="flex flex-col gap-3">
@@ -41,14 +91,26 @@ export default function ProductPage() {
               name="quantityChoice"
               className="flex flex-row justify-between border border-neutral-200 w-[150px] rounded-full p-3 pl-6 pr-6 font-bold"
             >
-              <button>-</button>
-              <div>3</div>
-              <button>+</button>
+              <button
+                className=" w-6"
+                onClick={() => updateQuantity(quantity - 1)}
+              >
+                -
+              </button>
+              <div>{quantity}</div>
+              <button
+                className=" w-6"
+                onClick={() => setQuantity(quantity + 1)}
+              >
+                +
+              </button>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <ButtonOrange buttonName={"Add to cart"} />
-            <ButtonBlack buttonName={"View cart"} />
+            <ButtonOrange buttonName={"Add to cart"} onClick={handleClick} />
+            <Link to="/auth/cart">
+              <ButtonBlack buttonName={"View cart"} />
+            </Link>
           </div>
           <div className="font-bold text-sm flex flex-col gap-4">
             <p>* Please note that:</p>

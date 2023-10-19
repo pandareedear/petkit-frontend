@@ -4,7 +4,6 @@ import Joi from "joi";
 import CreateProductInput from "./CreateProductInput";
 import InputErrorMessage from "../../auth/InputErrorMessage";
 import ButtonBlack from "../../ButtonBlack";
-import { Link } from "react-router-dom";
 
 const createProductSchema = Joi.object({
   enumCategory: Joi.string().trim().required(),
@@ -122,9 +121,7 @@ export default function CreateProductForm() {
           </div>
 
           <div className="mt-2">
-            <Link to="/">
-              <ButtonBlack buttonName={"Save product"} />
-            </Link>
+            <ButtonBlack buttonName={"Save product"} />
           </div>
         </div>
       </form>

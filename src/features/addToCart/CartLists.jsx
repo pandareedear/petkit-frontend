@@ -4,16 +4,13 @@ export default function CartLists({
   productPrice,
   quantityPlaceholder,
   totalPrice,
+  imageUrl,
 }) {
   return (
     <div className="flex h-[100px] items-center">
       <div className="flex flex-row w-[515px]">
-        <img
-          src="https://petkit.com/cdn/shop/files/d4sh-png.png?v=1694585017&width=96"
-          alt=""
-          className="w-[1500] h-[1500]"
-        />
-        <div className="flex flex-col mt-6">
+        <img src={imageUrl} alt="" className="w-[96px] h-[96px] " />
+        <div className="flex flex-col mt-6 ml-4">
           <div className="font-bold">{productName}</div>
           <div>{productPrice}</div>
         </div>

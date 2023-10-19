@@ -1,33 +1,49 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CatHead } from "../icons";
-const imageMapping = {
-  0: "",
-};
+import axios from "../config/axios";
+import { useEffect } from "react";
+import { getAccessToken } from "../utils/local-storage";
 export default function HomePage() {
-  const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [allProduct, setAllproduct] = useState([]);
+  const [initialLoading, setInitialLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getAccessToken()) {
+      axios
+        .get("/")
+        .then((res) => {
+          setAllproduct(res.data.products);
+        })
+        .finally(() => {
+          setInitialLoading(false);
+        });
+    } else {
+      setInitialLoading(false);
+    }
+  }, []);
 
   return (
     <div className="grid grid-cols-3 gap-[10px]">
-      {data.map((el, idx) => {
+      {allProduct.map((el, idx) => {
         return (
           <div
-            key={el}
+            key={el?.id}
             className="w-[100%] h-[450px] mb-32"
             onClick={() => {
-              navigate("/product/" + el);
+              navigate("/product/" + el?.id);
             }}
           >
-            {el}
             <img
-              src="//petkit.com/cdn/shop/files/t4_png_f8e9a320-915a-46c2-961b-dccab2421d5e.png?v=1691739173&width=1500"
+              src={el?.product[0]?.imageUrl}
               className="w-full flex justify-center"
             />
-            <div className="text-xs pt-7 mb-2 text-gray-500">
-              XLarge for Multi-cat Family
-            </div>
-            <div className="text-lg font-bold mb-2">PETKIT PURAMAX</div>
+
+            {/* <div className="text-xs pt-7 mb-2 h-20 text-gray-500">
+              {el?.description}
+            </div> */}
+            <div className="text-lg font-bold mb-2">{el.productName}</div>
             <div className="flex flex-row gap-2 mb-2 ">
               <CatHead />
               <CatHead />
@@ -35,33 +51,10 @@ export default function HomePage() {
               <CatHead />
               <CatHead />
             </div>
-            <div>20,948.00 ฿</div>
+            <div>{Number(el?.price).toLocaleString("en-US")}</div>
           </div>
         );
       })}
     </div>
   );
 }
-// export default function HomePage() {
-//   const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="grid grid-cols-3 gap-[50px]">
-//       {data.map((el, idx) => {
-//         return (
-//           <div
-//             key={el}
-//             className="bg-red-100 w-[100%] h-[400px]"
-//             onClick={() => {
-//               navigate("/product/" + el);
-//             }}
-//           >
-//             {el}
-//             <img src={imageMapping[idx]} />
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// }

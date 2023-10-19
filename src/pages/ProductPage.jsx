@@ -7,7 +7,7 @@ import ButtonBlack from "../features/ButtonBlack";
 import { CatHead } from "../icons";
 import { addAccessToken, getAccessToken } from "../utils/local-storage";
 import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/use-auth";
+import { useCart } from "../hooks/use-cart";
 
 export default function ProductPage() {
   const { productId } = useParams();
@@ -35,21 +35,28 @@ export default function ProductPage() {
     if (quantity > 0) setQuantity(quantity - 1);
   };
 
-  const { cart, setCart } = useAuth();
+  const { cart, setCart, getCart } = useCart();
 
+  useEffect(() => {
+    const findProductAlreadyInCart = cart.find((el) => {
+      return el.productId === product.id;
+    });
+    if (findProductAlreadyInCart) {
+      setQuantity(findProductAlreadyInCart.quantity);
+    }
+  }, [product.id, cart]);
   const handleClick = async () => {
     try {
       const shoppingCart = {
         quantity,
         productId: product.id,
         price: product?.price,
+        Product: product,
       };
-      console.log(shoppingCart);
+      console.log("quantity", quantity);
+
       const res = await axios.post("/auth/cart", shoppingCart);
-      console.log(cart);
-      console.log("haha");
-      setCart([shoppingCart]);
-      setCart;
+      getCart();
     } catch (err) {
       console.log(err);
     }
@@ -73,7 +80,9 @@ export default function ProductPage() {
           name={"productDesccription"}
         >
           <div className=" flex  flex-col gap-8 ">
-            <div className="text-4xl font-bold ">{product?.productName}</div>
+            <div className="text-4xl font-bold ">
+              {product && product?.productName}
+            </div>
             <div className="flex flex-row gap-2 ">
               <CatHead />
               <CatHead />

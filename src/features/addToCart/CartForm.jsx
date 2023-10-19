@@ -1,14 +1,9 @@
-import { useState } from "react";
 import CartLists from "./CartLists";
 import TotalCart from "../addToCart/TotalCart";
-import axios from "../../config/axios";
-import { useEffect } from "react";
-import { getAccessToken } from "../../utils/local-storage";
 import { useCart } from "../../hooks/use-cart";
 
 export default function CartForm() {
-  const { cart, setCart } = useCart();
-  const [initialLoading, setInitialLoading] = useState(true);
+  const { cart, grandTotal, handleRemoveClick } = useCart();
 
   return (
     <>
@@ -31,12 +26,15 @@ export default function CartForm() {
                   )}
                   quantityPlaceholder={el?.quantity}
                   totalPrice={Number(el?.totalPrice).toLocaleString("en-US")}
+                  onClick={() => {
+                    handleRemoveClick(el.id);
+                  }}
                 />
               </div>
             );
           })}
         </div>
-        <TotalCart />
+        <TotalCart grandTotal={Number(grandTotal).toLocaleString("en-US")} />
       </div>
     </>
   );

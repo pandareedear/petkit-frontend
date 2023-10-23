@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
 import Joi from "joi";
+import { Link, useNavigate } from "react-router-dom";
 
 import CheckoutButton from "../checkout/CheckoutButton";
 import CheckoutErrorMessage from "../checkout/CheckoutErrorMessage";
@@ -48,9 +49,9 @@ export default function CheckoutForm({ formName, formDescription }) {
     province: "",
   });
   const [error, setError] = useState({});
-
+  const navigate = useNavigate();
   const { checkoutAddress } = useAuth();
-  const { setCart } = useCart();
+  const { setCart, cart } = useCart();
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -66,6 +67,8 @@ export default function CheckoutForm({ formName, formDescription }) {
     checkoutAddress(input)
       .then((res) => {
         setCart();
+        console.log("ress", res);
+        navigate(`/auth/qr/order/${res.data.order.id}`);
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -200,7 +203,9 @@ export default function CheckoutForm({ formName, formDescription }) {
               )}
             </div>
             <div className="mt-2">
+              {/* <Link to={`/auth/qr/${cart.userId}/${cart.id}`}> */}
               <CheckoutButton buttonName="Pay Now" />
+              {/* </Link> */}
             </div>
           </div>
         </form>

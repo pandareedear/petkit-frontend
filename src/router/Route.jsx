@@ -102,7 +102,7 @@ const router = createBrowserRouter([
         element: <CheckoutPage />,
       },
       {
-        path: "qr",
+        path: "qr/order/:orderId",
         element: <QrPage />,
       },
     ],

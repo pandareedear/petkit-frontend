@@ -14,6 +14,7 @@ export const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
   const [authUser, setAuthUser] = useState(null || getAccessToken());
   const [initialLoading, setInitialLoading] = useState(true);
+  const [orderId, setOrder] = useState();
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -77,8 +78,23 @@ export default function AuthContextProvider({ children }) {
         `/auth/address?checkOut=${true}`,
         checkoutInputObject
       );
+      return res;
     } catch (err) {
       throw err;
+    }
+  };
+
+  const uploadSlipImage = async (formData) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      console.log("ID NA BAN", formData.get("id"));
+      const res = await axios.post(
+        `/auth/upload-slip/${formData.get("id")}`,
+        formData
+      );
+      console.log("File uploaded successfully", formData);
+    } catch (err) {
+      console.log("Error uploading file:", err);
     }
   };
 
@@ -105,6 +121,7 @@ export default function AuthContextProvider({ children }) {
         editAddress,
         createProduct,
         checkoutAddress,
+        uploadSlipImage,
       }}
     >
       {children}

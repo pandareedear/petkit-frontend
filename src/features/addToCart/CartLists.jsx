@@ -5,6 +5,7 @@ export default function CartLists({
   totalPrice,
   imageUrl,
   onClick,
+  handleChangeQuantity,
 }) {
   return (
     <div className="flex h-[100px] items-center">
@@ -19,6 +20,7 @@ export default function CartLists({
         <input
           type="text"
           placeholder={quantityPlaceholder}
+          onChange={handleChangeQuantity}
           className="border border-spacing-1 rounded-md w-12 h-9 p-2 text-xs text-center "
         ></input>
         <button className="text-[12px] " onClick={onClick}>

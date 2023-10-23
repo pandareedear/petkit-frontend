@@ -20,6 +20,7 @@ export default function CartContextProvider({ children }) {
       .get("/auth/cart")
       .then((res) => {
         setCart(res.data.cart);
+        console.log(res.data.cart);
       })
       .catch((error) => {
         console.log(error);
@@ -63,6 +64,15 @@ export default function CartContextProvider({ children }) {
     }
   };
 
+  const handleChangeQuantity = async (itemId) => {
+    try {
+      axios.patch(`auth/cart/${itemId}`);
+      getCart();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -72,6 +82,7 @@ export default function CartContextProvider({ children }) {
         grandTotal,
         handleRemoveClick,
         getCart,
+        handleChangeQuantity,
       }}
     >
       {children}

@@ -1,9 +1,11 @@
 import CartLists from "./CartLists";
 import TotalCart from "../addToCart/TotalCart";
 import { useCart } from "../../hooks/use-cart";
+import { useState } from "react";
 
 export default function CartForm() {
-  const { cart, setCart, grandTotal, handleRemoveClick } = useCart();
+  const { cart, setCart, grandTotal, handleRemoveClick, handleChangeQuantity } =
+    useCart();
 
   return (
     <>
@@ -29,6 +31,7 @@ export default function CartForm() {
                   onClick={() => {
                     handleRemoveClick(el.id);
                   }}
+                  onChange={() => setCart(handleChangeQuantity)}
                 />
               </div>
             );

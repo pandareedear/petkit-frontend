@@ -98,18 +98,6 @@ export default function AuthContextProvider({ children }) {
     }
   };
 
-  const createProduct = async (CreateProductInputObject) => {
-    // eslint-disable-next-line no-useless-catch
-    try {
-      console.log(CreateProductInputObject);
-      const res = await axios.post("/admin/product", CreateProductInputObject);
-      addAccessToken(res.data.accessToken);
-    } catch (err) {
-      throw err;
-      // console.log(err);
-    }
-  };
-
   return (
     <AuthContext.Provider
       value={{
@@ -119,7 +107,7 @@ export default function AuthContextProvider({ children }) {
         initialLoading,
         logout,
         editAddress,
-        createProduct,
+
         checkoutAddress,
         uploadSlipImage,
       }}

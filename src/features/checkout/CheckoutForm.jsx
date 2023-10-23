@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/use-auth";
 import Joi from "joi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import CheckoutButton from "../checkout/CheckoutButton";
 import CheckoutErrorMessage from "../checkout/CheckoutErrorMessage";

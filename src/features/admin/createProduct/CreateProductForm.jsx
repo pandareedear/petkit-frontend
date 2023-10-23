@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useAuth } from "../../../hooks/use-auth";
 import Joi from "joi";
 import CreateProductInput from "./CreateProductInput";
+import CreateProductInputArea from "./CreatProductInputArea";
 import InputErrorMessage from "../../auth/InputErrorMessage";
 import ButtonBlack from "../../ButtonBlack";
+import { useAdmin } from "../../../hooks/use-admin";
 
 const createProductSchema = Joi.object({
   enumCategory: Joi.string().trim().required(),
@@ -26,6 +28,9 @@ const validateProduct = (input) => {
 };
 
 export default function CreateProductForm() {
+  const [error, setError] = useState({});
+  const [file, setFile] = useState(null);
+  const { createProduct } = useAdmin();
   const [input, setInput] = useState({
     enumCategory: "",
     productName: "",
@@ -33,37 +38,43 @@ export default function CreateProductForm() {
     price: "",
   });
 
-  const [error, setError] = useState({});
-
-  const { createProduct } = useAuth();
-
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    const validateError = validateProduct(input);
-    console.log(validateError);
-    if (validateError) {
-      return setError(validateError);
+  const handleSubmitForm = async (e) => {
+    try {
+      e.preventDefault();
+      const validateError = validateProduct(input);
+      console.log(validateError);
+      if (validateError) {
+        return setError(validateError);
+      }
+      setError({});
+
+      const formData = new FormData();
+      formData.append("imageUrl", file);
+      formData.append("productName", input.productName);
+      formData.append("description", input.description);
+      formData.append("enumCategory", input.enumCategory);
+      formData.append("price", input.price);
+      console.log(file);
+      console.log(input.productName);
+
+      await createProduct(formData);
+    } catch (err) {
+      console.log(err);
+      // setError({ mobile: err.response.data.message });
     }
-    setError({});
-    createProduct(input).catch((err) => {
-      console.log(err.response.data);
-      setError({ mobile: err.response.data.message });
-    });
   };
   return (
     <>
-      <form
-        onSubmit={handleSubmitForm}
-        className=" gap-3 m-auto w-[600px] p-10"
-      >
+      <form onSubmit={handleSubmitForm} className=" gap-3 m-auto w-[600px] p-3">
         <div className="">
           <h1 className="text-xl mb-3 font-bold">Create Product</h1>
           {/* <p className="text-xs mb-2">{formDescription}</p> */}
         </div>
+
         <div className="flex flex-col gap-2">
           <div className="col-span-full">
             <CreateProductInput
@@ -80,7 +91,7 @@ export default function CreateProductForm() {
             )}
           </div>
           <div>
-            <CreateProductInput
+            <CreateProductInputArea
               placeholder={"Description"}
               value={input.description}
               onChange={handleChangeInput}
@@ -119,6 +130,16 @@ export default function CreateProductForm() {
           <div>
             {error.price && <InputErrorMessage message={error.price} />}
           </div>
+          <input
+            type="file"
+            className="col-span-full"
+            onChange={(e) => {
+              if (e.target.files[0]) {
+                setFile(e.target.files[0]);
+                console.log(e.target.files[0]);
+              }
+            }}
+          />
 
           <div className="mt-2">
             <ButtonBlack buttonName={"Save product"} />

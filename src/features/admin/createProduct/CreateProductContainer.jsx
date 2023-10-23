@@ -8,7 +8,7 @@ export default function AddProduct() {
   return (
     <>
       <div
-        className="border h-[600px] w-[400px] rounded-[50px] flex flex-col  justify-center items-center mt-16 pt-4  bg-neutral-100 cursor-pointer "
+        className="border h-[650px] w-[400px] rounded-[50px] flex flex-col  justify-center items-center mt-16 pt-4  bg-neutral-100 cursor-pointer "
         onClick={() => setIsOpen(true)}
       >
         <div className="w-[120px] h-[120px] rounded-full bg-neutral-300">

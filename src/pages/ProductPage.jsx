@@ -45,6 +45,7 @@ export default function ProductPage() {
       setQuantity(findProductAlreadyInCart.quantity);
     }
   }, [product.id, cart]);
+
   const handleClick = async () => {
     try {
       const shoppingCart = {

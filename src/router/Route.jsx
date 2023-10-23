@@ -17,6 +17,7 @@ import LayoutForCheckout from "../layout/LayoutForCheckout";
 import AdminOrderPage from "../pages/AdminOrderPage";
 import AdminProductPage from "../pages/AdminProductPage";
 import LayoutForAdmin from "../layout/LayoutForAdmin";
+import LayoutForAdminOrder from "../layout/LayoutForAdminOrder";
 
 const router = createBrowserRouter([
   {
@@ -112,12 +113,18 @@ const router = createBrowserRouter([
     element: <LayoutForAdmin />,
     children: [
       {
-        path: "order",
-        element: <AdminOrderPage />,
-      },
-      {
         path: "product",
         element: <AdminProductPage />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <LayoutForAdminOrder />,
+    children: [
+      {
+        path: "order",
+        element: <AdminOrderPage />,
       },
     ],
   },

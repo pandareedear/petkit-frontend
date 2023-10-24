@@ -1,13 +1,13 @@
 import { useOrder } from "../../../hooks/use-order";
-
+import axios from "../../../config/axios";
 import { useEffect } from "react";
 import { getAccessToken } from "../../../utils/local-storage";
 import ViewOrderLists from "./ViewOrderLists";
 import { useState } from "react";
 
 export default function ViewOrderForm() {
-  const { order, initialLoading, setInitialLoading, getOrder } = useOrder();
-  const [status, setStatus] = useState({});
+  const { setOrder, order, initialLoading, setInitialLoading, getOrder } =
+    useOrder();
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -17,10 +17,28 @@ export default function ViewOrderForm() {
     }
   }, []);
 
-  const handleChange = async (e) => {
+  const handleChange = async (e, el) => {
     try {
+      //   console.log(e.target.value);
+      //   console.log(el.id);
       e.preventDefault();
-      setStatus({ ...status, [e.target.name]: e.target.value });
+
+      console.log(el.paymentStatus);
+
+      await axios.patch(`/admin/order/${el.id}`, {
+        paymentStatus: e.target.value,
+      });
+      getOrder();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRemoveClick = async (id) => {
+    console.log(id);
+    try {
+      await axios.delete(`/admin/order/${id}`);
+      getOrder();
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +65,12 @@ export default function ViewOrderForm() {
                 orderDate={el?.paymentDate}
                 total={Number(el?.totalPrice).toLocaleString()}
                 status={el?.paymentStatus}
-                onChange={handleChange}
+                onChange={(event) => {
+                  handleChange(event, el);
+                }}
+                onClick={() => {
+                  handleRemoveClick(el.id);
+                }}
               />
             </div>
           );

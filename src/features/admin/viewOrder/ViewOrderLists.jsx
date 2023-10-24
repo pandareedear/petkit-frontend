@@ -6,6 +6,8 @@ export default function ViewOrderLists({
   total,
   slipImageUrl,
   onChange,
+  status,
+  onClick,
 }) {
   return (
     <div className="flex justify-between ">
@@ -25,11 +27,15 @@ export default function ViewOrderLists({
           name="status"
           className="cursor-pointer bg-neutral-100 rounded-md"
           onChange={onChange}
+          defaultValue={status}
         >
           <option value="PENDING">PENDING</option>
           <option value="PAID">PAID</option>
         </select>
-        <div className="text-[13px] underline underline-offset-1 cursor-pointer text-red-600">
+        <div
+          onClick={onClick}
+          className="text-[13px] underline underline-offset-1 cursor-pointer text-red-600"
+        >
           remove
         </div>
       </div>

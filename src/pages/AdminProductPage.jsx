@@ -6,16 +6,16 @@ import axios from "axios";
 import { useAdmin } from "../hooks/use-admin";
 
 export default function AdminProductPage() {
-  const [allProduct, setAllproduct] = useState([]);
   const [initialLoading, setInitialLoading] = useState(true);
-  const { createProduct } = useAdmin();
+  const { createProduct, getProduct, allProducts, setAllproducts } = useAdmin();
 
   useEffect(() => {
     if (getAccessToken()) {
       axios
         .get("/admin/product")
         .then((res) => {
-          setAllproduct(res.data.products);
+          setAllproducts(res.data.products);
+          getProduct();
         })
         .finally(() => {
           setInitialLoading(false);
@@ -23,14 +23,14 @@ export default function AdminProductPage() {
     } else {
       setInitialLoading(false);
     }
-  }, [createProduct]);
+  }, []);
 
   return (
     <>
       <div className="grid grid-cols-3 gap-[10px]">
         <CreateProductContainer />
 
-        {allProduct.map((el) => {
+        {allProducts.map((el) => {
           return (
             <div key={el?.id}>
               <ShowProductLists

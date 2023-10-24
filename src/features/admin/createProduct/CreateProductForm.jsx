@@ -30,7 +30,7 @@ const validateProduct = (input) => {
 export default function CreateProductForm() {
   const [error, setError] = useState({});
   const [file, setFile] = useState(null);
-  const { createProduct } = useAdmin();
+  const { createProduct, getProduct } = useAdmin();
   const [input, setInput] = useState({
     enumCategory: "",
     productName: "",
@@ -62,6 +62,7 @@ export default function CreateProductForm() {
       console.log(input.productName);
 
       await createProduct(formData);
+      getProduct();
     } catch (err) {
       console.log(err);
       // setError({ mobile: err.response.data.message });

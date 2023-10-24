@@ -13,13 +13,15 @@ export const AdminContext = createContext();
 export default function AdminContextProvider({ children }) {
   const [authUser, setAuthUser] = useState(null || getAccessToken());
   const [initialLoading, setInitialLoading] = useState(true);
-  const [product, setProduct] = useState();
+  const [allProducts, setAllProducts] = useState([]);
 
   const getProduct = () => {
     axios
       .get("/admin/product")
       .then((res) => {
-        setProduct(res.data.product);
+        console.log("triggered");
+        console.log("data.product", res.data);
+        setAllProducts(res.data.products);
       })
       .catch((error) => {
         console.log(error);
@@ -35,7 +37,7 @@ export default function AdminContextProvider({ children }) {
     } else {
       setInitialLoading(false);
     }
-  }, [product?.length]);
+  }, [allProducts.length]);
 
   //   const createProduct = async (formData) => {
   //     // eslint-disable-next-line no-useless-catch
@@ -57,7 +59,6 @@ export default function AdminContextProvider({ children }) {
       console.log("FORMDATA", formData);
       const res = await axios.post("/admin/product", formData);
       console.log("File uploaded successfully", formData);
-      getProduct();
     } catch (err) {
       console.log("Error uploading file:", err);
     }
@@ -68,8 +69,9 @@ export default function AdminContextProvider({ children }) {
       value={{
         initialLoading,
         createProduct,
-        product,
-        setProduct,
+        allProducts,
+        setAllProducts,
+        getProduct,
       }}
     >
       {children}

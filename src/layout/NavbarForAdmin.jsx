@@ -16,12 +16,15 @@ export default function Navbar() {
         <div className="w-[25%]">
           <ul className="flex flex-row gap-5 justify-end">
             <li className="w- flex items-center justify-center ">
-              {/* <Link to="/login"> */}
-              <OrderIcon />
-              {/* </Link> */}
+              <Link
+                to="/admin/order"
+                className="w-[30px] flex justify-start items-start"
+              >
+                <OrderIcon />
+              </Link>
             </li>
-            <li className="w-6">
-              <Link to="">
+            <li className="w-[25px]">
+              <Link to="/admin/product">
                 <ProductIcon />
               </Link>
             </li>

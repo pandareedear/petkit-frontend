@@ -32,6 +32,7 @@ export default function CartContextProvider({ children }) {
 
   useEffect(() => {
     if (getAccessToken()) {
+      console.log("trigger");
       getCart();
     } else {
       setInitialLoading(false);
@@ -50,10 +51,10 @@ export default function CartContextProvider({ children }) {
     setGrandTotal(sum);
   }, [cart, getSum]);
 
-  useEffect(() => {
-    getCart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   getCart();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handleRemoveClick = async (itemId) => {
     try {

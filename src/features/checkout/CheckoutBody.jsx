@@ -4,7 +4,7 @@ import CheckoutSummary from "./CheckoutSummary";
 export default function CheckoutBody() {
   return (
     <div className="flex flex-row ">
-      <div className="w-[100%] flex justify-end ">
+      <div className="w-full flex justify-end ">
         <CheckoutForm />
       </div>
       <hr />

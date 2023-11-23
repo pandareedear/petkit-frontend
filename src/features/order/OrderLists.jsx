@@ -4,7 +4,7 @@ export default function OrderLists({ orderNumber, orderDate, total, status }) {
   return (
     <div className="flex justify-between ">
       <div className="">{orderNumber}</div>
-      <div className="ml-60 pr-6 mr-">
+      <div className="ml-60 pr-6 ">
         {!orderDate ? null : dateFormat(orderDate, "dd/mm/yyyy")}
       </div>
       <div className="">{total}</div>

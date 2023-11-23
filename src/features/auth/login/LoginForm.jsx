@@ -34,15 +34,17 @@ export default function LoginForm() {
 
   const [error, setError] = useState({});
 
-  const { login } = useAuth();
+  const { login, setInitialLoading } = useAuth();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    // setInitialLoading(true);
     const validateError = validateLogin(input);
     if (validateError) {
       return setError(validateError);
     }
     console.log(input);
+
     login(input).catch((err) => {
       console.log("error_login", err.response.data.message);
       setError({ emailOrPassword: err.response.data.message });

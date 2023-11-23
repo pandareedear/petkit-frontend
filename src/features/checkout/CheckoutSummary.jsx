@@ -21,19 +21,19 @@ export default function CheckoutSummary() {
           })}
       </div>
 
-      <div className="flex flex-row justify-between mb-2 mr-[450px]">
+      <div className="flex flex-row justify-between mb-2 w-[305px]">
         <div className="text-[16px]">Subtotal</div>
         <div className="text-[16px] font-semibold">
           {Number(grandTotal).toLocaleString("en-US")}
         </div>
       </div>
-      <div className="flex flex-row justify-between mb-2 mr-[450px]">
+      <div className="flex flex-row justify-between mb-2 w-[305px]">
         <div className="text-[16px]">Shipping</div>
         <div className="text-[14px] text-neutral-500">
           Enter shipping address
         </div>
       </div>
-      <div className="flex flex-row justify-between mb-2 mr-[450px]">
+      <div className="flex flex-row justify-between mb-2 w-[305px]">
         <div className=" text-[19px] font-semibold">Total</div>
         <div className="font-semibold text-[17px]">
           <span className="font-thin text-[15px]">THB </span>

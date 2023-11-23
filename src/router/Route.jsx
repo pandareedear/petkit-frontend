@@ -18,6 +18,8 @@ import AdminOrderPage from "../pages/AdminOrderPage";
 import AdminProductPage from "../pages/AdminProductPage";
 import LayoutForAdmin from "../layout/LayoutForAdmin";
 import LayoutForAdminOrder from "../layout/LayoutForAdminOrder";
+import Loading from "../components/Loading";
+import AdminEditProductPage from "../pages/AdminEditProductPage";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +118,7 @@ const router = createBrowserRouter([
         path: "product",
         element: <AdminProductPage />,
       },
+      { path: "product/:productId", element: <AdminEditProductPage /> },
     ],
   },
   {

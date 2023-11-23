@@ -6,6 +6,7 @@ import CreateProductInputArea from "./CreatProductInputArea";
 import InputErrorMessage from "../../auth/InputErrorMessage";
 import ButtonBlack from "../../ButtonBlack";
 import { useAdmin } from "../../../hooks/use-admin";
+import Loading from "../../../components/Loading";
 
 const createProductSchema = Joi.object({
   enumCategory: Joi.string().trim().required(),
@@ -28,6 +29,7 @@ const validateProduct = (input) => {
 };
 
 export default function CreateProductForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
   const [file, setFile] = useState(null);
   const { createProduct, getProduct } = useAdmin();
@@ -60,14 +62,22 @@ export default function CreateProductForm() {
       formData.append("price", input.price);
       console.log(file);
       console.log(input.productName);
-
+      setIsLoading(true);
       await createProduct(formData);
       getProduct();
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       // setError({ mobile: err.response.data.message });
+    } finally {
+      setIsLoading(false);
     }
   };
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <form onSubmit={handleSubmitForm} className=" gap-3 m-auto w-[600px] p-3">

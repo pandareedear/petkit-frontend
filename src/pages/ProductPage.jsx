@@ -16,26 +16,22 @@ export default function ProductPage() {
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    if (getAccessToken()) {
-      axios
-        .get(`/product/${productId}`)
-        .then((res) => {
-          setProduct(res.data);
-          console.log(res.data);
-        })
-        .finally(() => {
-          setInitialLoading(false);
-        });
-    } else {
-      setInitialLoading(false);
-    }
+    axios
+      .get(`/product/${productId}`)
+      .then((res) => {
+        setProduct(res.data);
+        console.log(res.data);
+      })
+      .finally(() => {
+        setInitialLoading(false);
+      });
   }, []);
 
   const updateQuantity = () => {
     if (quantity > 0) setQuantity(quantity - 1);
   };
 
-  const { cart, setCart, getCart } = useCart();
+  const { cart, getCart } = useCart();
 
   useEffect(() => {
     const findProductAlreadyInCart = cart.find((el) => {
@@ -56,7 +52,7 @@ export default function ProductPage() {
       };
       console.log("quantity", quantity);
 
-      const res = await axios.post("/auth/cart", shoppingCart);
+      await axios.post("/auth/cart", shoppingCart);
       getCart();
     } catch (err) {
       console.log(err);

@@ -11,7 +11,7 @@ import {
 export default function Footer() {
   return (
     <div className="">
-      <div className="grid grid-cols-2 mt-72 pl-[17%] pr-[17%]">
+      <div className="grid grid-cols-2 mt-50 pl-[17%] pr-[17%]">
         <div className="flex p-20">
           <div className="flex flex-col justify-start p-6">
             <h1 className="text-4xl font-bold">Subscribe to our </h1>

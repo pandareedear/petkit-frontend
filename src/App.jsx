@@ -5,6 +5,7 @@ import Route from "./router/Route";
 function App() {
   const { initialLoading } = useAuth();
   if (initialLoading) {
+    console.log(initialLoading);
     return <Loading />;
   }
   return <Route />;

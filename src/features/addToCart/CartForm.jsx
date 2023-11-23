@@ -4,8 +4,14 @@ import { useCart } from "../../hooks/use-cart";
 import { useState } from "react";
 
 export default function CartForm() {
-  const { cart, setCart, grandTotal, handleRemoveClick, handleChangeQuantity } =
-    useCart();
+  const {
+    cart,
+    setCart,
+    grandTotal,
+    getCart,
+    handleRemoveClick,
+    handleChangeQuantity,
+  } = useCart();
 
   return (
     <>
@@ -30,6 +36,7 @@ export default function CartForm() {
                   totalPrice={Number(el?.totalPrice).toLocaleString("en-US")}
                   onClick={() => {
                     handleRemoveClick(el.id);
+                    getCart();
                   }}
                   onChange={() => setCart(handleChangeQuantity)}
                 />

@@ -9,20 +9,23 @@ export default function HomePage() {
   const [initialLoading, setInitialLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (getAccessToken()) {
+  console.log("test");
+  useEffect(
+    () => {
+      // if (getAccessToken()) {
       axios
         .get("/")
         .then((res) => {
+          console.log(res);
           setAllproduct(res.data.products);
         })
         .finally(() => {
           setInitialLoading(false);
         });
-    } else {
-      setInitialLoading(false);
-    }
-  }, []);
+    },
+    // }
+    []
+  );
 
   return (
     <div className="grid grid-cols-3 gap-[10px]">

@@ -39,39 +39,52 @@ export default function AdminContextProvider({ children }) {
     }
   }, [allProducts.length]);
 
-  //   const createProduct = async (formData) => {
-  //     // eslint-disable-next-line no-useless-catch
-  //     try {
-  //       console.log("ID NA BAN", formData.get("id"));
-  //       const res = await axios.post(
-  //         `/auth/upload-slip/${formData.get("id")}`,
-  //         formData
-  //       );
-  //       console.log("File uploaded successfully", formData);
-  //     } catch (err) {
-  //       console.log("Error uploading file:", err);
-  //     }
-  //   };
-
   const createProduct = async (formData) => {
     // eslint-disable-next-line no-useless-catch
     try {
       console.log("FORMDATA", formData);
       const res = await axios.post("/admin/product", formData);
+      if (!res) {
+        setInitialLoading(true);
+      }
       console.log("File uploaded successfully", formData);
     } catch (err) {
       console.log("Error uploading file:", err);
     }
   };
 
+  const editProduct = async (formData, id) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      console.log("FORMDATA", formData);
+      const res = await axios.patch(`/admin/product/${id}`, formData);
+      if (!res) {
+        setInitialLoading(true);
+      }
+      console.log("File uploaded successfully", formData);
+    } catch (err) {
+      console.log("Error uploading file:", err);
+    }
+  };
+
+  // const handleRemoveClick = async (itemId) => {
+  //   try {
+  //     axios.delete(`admin/product/${itemId}`);
+  //     getProduct();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <AdminContext.Provider
       value={{
-        initialLoading,
+        setInitialLoading,
         createProduct,
         allProducts,
         setAllProducts,
         getProduct,
+        editProduct,
       }}
     >
       {children}

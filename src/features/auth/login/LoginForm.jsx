@@ -38,7 +38,7 @@ export default function LoginForm() {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    // setInitialLoading(true);
+    setInitialLoading(true);
     const validateError = validateLogin(input);
     if (validateError) {
       return setError(validateError);

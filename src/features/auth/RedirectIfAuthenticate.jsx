@@ -7,5 +7,6 @@ export default function RedirectIfAuthenticated({ children }) {
   if (authUser) {
     return <Navigate to="/account/order" />;
   }
+
   return children;
 }

@@ -20,6 +20,7 @@ import LayoutForAdmin from "../layout/LayoutForAdmin";
 import LayoutForAdminOrder from "../layout/LayoutForAdminOrder";
 import Loading from "../components/Loading";
 import AdminEditProductPage from "../pages/AdminEditProductPage";
+import AuthenticatedAdmin from "../features/auth/AuthenticatedAdmin";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
       { path: "product/:productId", element: <ProductPage /> },
       {
         path: "register",
-        element: <RegisterPage />,
+        element: (
+          <RedirectIfAuthenticated>
+            <RegisterPage />,
+          </RedirectIfAuthenticated>
+        ),
       },
     ],
   },
@@ -112,7 +117,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <LayoutForAdmin />,
+    element: (
+      <AuthenticatedAdmin>
+        <LayoutForAdmin />
+      </AuthenticatedAdmin>
+    ),
     children: [
       {
         path: "product",
@@ -123,7 +132,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <LayoutForAdminOrder />,
+    element: (
+      <AuthenticatedAdmin>
+        <LayoutForAdminOrder />
+      </AuthenticatedAdmin>
+    ),
     children: [
       {
         path: "order",

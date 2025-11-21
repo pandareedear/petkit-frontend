@@ -33,6 +33,7 @@ export default function LoginForm() {
   });
 
   const [error, setError] = useState({});
+  const [success, setSuccess] = useState("");
 
   const { login, setInitialLoading } = useAuth();
 
@@ -45,10 +46,22 @@ export default function LoginForm() {
     }
     console.log(input);
 
-    login(input).catch((err) => {
-      console.log("error_login", err.response.data.message);
-      setError({ emailOrPassword: err.response.data.message });
-    });
+    login(input)
+      .then(() => {
+        setSuccess("Login successful!");
+        setError({});
+        // Auto-hide success message
+        setTimeout(() => {
+          setSuccess("");
+        }, 3000);
+      })
+      .catch((err) => {
+        console.log("error_login", err.response.data.message);
+        setError({ emailOrPassword: err.response.data.message });
+      })
+      .finally(() => {
+        setInitialLoading(false);
+      });
   };
   console.log(error);
 
@@ -57,6 +70,11 @@ export default function LoginForm() {
       <div className="flex flex-col items-center gap-2 m-auto">
         <h6 className="font-bold text-[45px] pb-6">Login</h6>
         <LoginAlert message={error.emailOrPassword} error={error} />
+        {success && (
+          <div className="p-3 bg-green-100 border border-green-300 text-green-700 rounded-md mb-4">
+            {success}
+          </div>
+        )}
         <LoginInput
           placeholder="E-mail"
           value={input.email}
@@ -75,6 +93,7 @@ export default function LoginForm() {
           <InputErrorMessage message={error.email} />
         </div>
         <LoginInput
+          type="password"
           placeholder="Password"
           value={input.password}
           name="password"
